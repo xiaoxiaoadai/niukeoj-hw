@@ -8,8 +8,9 @@ while True:
         R = R[1:]
         R_value = R
         R = list(enumerate(R))
-        # TODO: 先把R处理一下：按值从小到大排列，且剔除序号大的重复值
+        # tmp_i 原序列中的值，用来做成员运算
         tmp_i = list()
+        # tmp_r 用来保存去重后的R
         tmp_r = list()
         for m in range(len(R)):
             # 去重
@@ -17,21 +18,27 @@ while True:
                 tmp_i.append(R[m][1])
                 tmp_r.append(R[m])
         R = tmp_r
-        tmp = list()
-        for m in range(len(R)):
+        # tmp = list()
+        '''for m in range(len(R)):
             # 排序
             if R[m][1] not in tmp:
                 if len(tmp) == 0:
                     tmp.append(R[m])
                 else:
                     for n in range(len(tmp)):
-                        if R[m][1] < tmp[n][1]:
+                        if int(R[m][1]) < int(tmp[n][1]):
                             tmp.insert(n, R[m])
                             break
-                        elif n == len(tmp)-1:
+                        else:
                             tmp.append(R[m])
-        # TODO: 要不要重新赋值R？tmp已经排好序
-        R = tmp
+        '''
+        # 对R进行冒泡排序
+        for x in range(len(R)):
+            for y in range(x+1, len(R)):
+                if int(R[x][1]) > int(R[y][1]):
+                    R[x], R[y] = R[y], R[x]
+        # R 排好序
+        # R = tmp
         I = I[1:]
         res = list()
         for i in range(len(R)):
@@ -47,6 +54,7 @@ while True:
                 res.append(count_i)
                 for p in res_i:
                     res.append(p)
+        res = [str(x) for x in res]
         print(str(len(res))+" "+" ".join(res))
     except:
         break
