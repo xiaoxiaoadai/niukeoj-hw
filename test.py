@@ -1,25 +1,24 @@
-#!/usr/bin/python3
-import sys
-# 记录所有Log,若超过8行输出时只取最新的8条！
-log_dict = {}
-idx_list = []
-while True:
-    try:
-        line = sys.stdin.readline()
-        if len(line) == 8 or line == '' or line == '\n':
-            break
-        path, num = line.split()
-        file_name = path.split('\\')[-1]
-        if len(file_name) > 16:
-            file_name = file_name[-16:]
-        idx = file_name + " " + num
-        if idx in log_dict.keys():
-            log_dict[idx] += 1
-        else:
-            log_dict[idx] = 1
-            idx_list.append(idx)
-    except:
-        break
-out_list = idx_list[-8:]
-for idx in out_list:
-    print(idx + " " + str(log_dict[idx]))
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+
+def compare2string(a, b):
+    """
+    compare between a and b
+    :param a:
+    :param b:
+    :return: 1=(a>b);-1=(a<b);0=(a=b)
+    """
+    if a == b:
+        return 0
+    elif a in b:
+        return 1
+    elif b in a:
+        return -1
+    for i in range(min(len(a), len(b))):
+        if a[i] > b[i]:
+            return 1
+        elif a[i] < b[i]:
+            return -1
+
+
+print(compare2string('abef', 'abc'))
