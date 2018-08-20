@@ -18,6 +18,33 @@ def my_sort(string):
 
 
 def my_trans(char):
+    '''
+    >>> my_trans('1')
+    '8'
+    '''
     # TODO: 把0-9和a-f和A-F的字符进行转换
+    dic = '0123456789abcdef'
+    if ord('0') <= ord(char) <= ord('9') or ord('a') <= ord(char.lower()) <= ord('f'):
+        # 直接切片倒序
+        index = bin(dic.index(char.lower())).lstrip('0b')
+        index = '0'*(4-len(index)) + index
+        index = index[::-1]
+        # 将倒序后的二进制转十进制
+        index = int(index, base=2)
+        return dic[index].upper()
+    else:
+        return char
 
 
+while True:
+    try:
+        str1, str2 = input().split()
+        # str2 = input()
+        strings = str1 + str2
+        strings = my_sort(strings)
+        res = list()
+        for i in strings:
+            res.append(my_trans(i))
+        print(''.join(res))
+    except:
+        break
