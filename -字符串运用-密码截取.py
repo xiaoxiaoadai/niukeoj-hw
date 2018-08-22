@@ -11,8 +11,11 @@ while True:
         maxi = 0
         for i in range(length):
             # TODO: 分奇偶两种情况判断回文子序列
-            if i - maxi == 0 and strings[i-maxi:i+maxi] == strings[i-maxi:i+maxi][::-1]:
-                    maxi += 1
+            if i-maxi >= 1 and strings[i-maxi-1:i+1] == strings[i-maxi-1:i+1][::-1]:
+                maxi += 2
+                continue
+            if i-maxi >= 0 and strings[i-maxi:i+1] == strings[i-maxi:i+1][::-1]:
+                maxi += 1
         print(maxi)
     except:
         break
